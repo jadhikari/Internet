@@ -1,0 +1,2 @@
+class InternetOrder < ApplicationRecord
+end

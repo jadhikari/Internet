@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sn: 1
+  apply_date: 2020-10-08 18:27:40
+  name: MyString
+  fb_id: MyString
+  phone_number: 1
+  postal_code: 1
+  house_type: MyString
+  kouji_date: 2020-10-08 18:27:40
+  plan: MyString
+  link: MyString
+  conclusion: MyText
+
+two:
+  sn: 1
+  apply_date: 2020-10-08 18:27:40
+  name: MyString
+  fb_id: MyString
+  phone_number: 1
+  postal_code: 1
+  house_type: MyString
+  kouji_date: 2020-10-08 18:27:40
+  plan: MyString
+  link: MyString
+  conclusion: MyText

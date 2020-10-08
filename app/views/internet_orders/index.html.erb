@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Internet Orders</h1>
+
+<table class ="table-sm">
+  <thead>
+    <tr>
+      <th>Sn</th>
+      <th>Apply date</th>
+      <th>Name</th>
+      <th>Fb</th>
+      <th>Phone number</th>
+      <th>Postal code</th>
+      <th>House type</th>
+      <th>Kouji date</th>
+      <th>Plan</th>
+      <th>Link</th>
+      <th>Conclusion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @internet_orders.each do |internet_order| %>
+      <tr>
+        <td><%= internet_order.sn %></td>
+        <td><%= internet_order.apply_date %></td>
+        <td><%= internet_order.name %></td>
+        <td><%= internet_order.fb_id %></td>
+        <td><%= internet_order.phone_number %></td>
+        <td><%= internet_order.postal_code %></td>
+        <td><%= internet_order.house_type %></td>
+        <td><%= internet_order.kouji_date %></td>
+        <td><%= internet_order.plan %></td>
+        <td><%= internet_order.link %></td>
+        <td><%= internet_order.conclusion %></td>
+        <td><%= link_to 'Show', internet_order %></td>
+        <td><%= link_to 'Edit', edit_internet_order_path(internet_order) %></td>
+        <td><%= link_to 'Destroy', internet_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Internet Order', new_internet_order_path %>
