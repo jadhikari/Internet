@@ -4,7 +4,11 @@ class InternetOrdersController < ApplicationController
   # GET /internet_orders
   # GET /internet_orders.json
   def index
-    @internet_orders = InternetOrder.all
+    @internet_orders  =  InternetOrder.order("created_at desc").page(params[:page]).per(params[:limit])
+    @internet_orders.where!('name like ?', "%#{params[:name]}%") if params[:name].present?
+    @internet_orders.where!('phone_number like ?', "%#{params[:phone_number]}%") if params[:phone_number].present?
+    #@internet_orders.where!(name: params[:name]) if params[:name].present?
+    #@internet_orders.where!(phone_number: params[:phone_number]) if params[:phone_number].present?
   end
 
   # GET /internet_orders/1
@@ -28,8 +32,8 @@ class InternetOrdersController < ApplicationController
 
     respond_to do |format|
       if @internet_order.save
-        format.html { redirect_to @internet_order, notice: 'Internet order was successfully created.' }
-        format.json { render :show, status: :created, location: @internet_order }
+        format.html { redirect_to internet_orders_url, notice: 'Internet order was successfully created.' }
+        format.json { render :index, status: :created, location: @internet_order }
       else
         format.html { render :new }
         format.json { render json: @internet_order.errors, status: :unprocessable_entity }
@@ -42,7 +46,7 @@ class InternetOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @internet_order.update(internet_order_params)
-        format.html { redirect_to @internet_order, notice: 'Internet order was successfully updated.' }
+        format.html { redirect_to internet_orders_url, notice: 'Internet order was successfully updated.' }
         format.json { render :show, status: :ok, location: @internet_order }
       else
         format.html { render :edit }
@@ -69,6 +73,6 @@ class InternetOrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def internet_order_params
-      params.require(:internet_order).permit(:sn, :apply_date, :name, :fb_id, :phone_number, :postal_code, :house_type, :kouji_date, :plan, :link, :conclusion)
+      params.require(:internet_order).permit(:sn, :apply_date, :name, :fb_id, :phone_number, :postal_code, :dob, :house_type, :kouji_date, :plan, :link, :conclusion)
     end
 end

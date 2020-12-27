@@ -1,16 +1,38 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Internet Orders</h1>
+<p id="notice"><%= notice %></p>
+<%= link_to 'New Internet Order', new_internet_order_path %>
 
-<table class ="table-sm">
-  <thead>
+<%= form_tag({}, {:method => 'get',:class => 'form-control-sm'}) do %>
+      <%=label_tag "Name:" %>
+      <%= text_field_tag :name, params[:name],  autocomplete: 'off' %>
+      &nbsp;    
+      <%=label_tag "Phone Num.:" %>
+      <%= text_field_tag :phone_number, params[:phone_number] , autocomplete: 'off' %>
+     
+      <%= submit_tag 'search', :disable_with => 'Searching...' %>
+      <%= link_to 'clear', :action => 'index'%>
+      
+<% end %>
+
+<div class="pull-left">
+    <%= form_tag internet_orders_path, method: :get, id: 'limit_form' do %>
+        <div class="select-tag">
+          Show <%= select_tag :limit, options_for_select([5, 10, 15, 20], selected: params[:limit] || 10), onchange: "$('#limit_form').submit();" %> documents per page
+        </div>
+    <% end %>
+  </div>
+ 
+
+<table class ="table table-sm table-hover">
+  <thead class="thead-dark">
     <tr>
       <th>Sn</th>
       <th>Apply date</th>
       <th>Name</th>
-      <th>Fb</th>
+      <th>Facebook link</th>
       <th>Phone number</th>
       <th>Postal code</th>
+      <th>DOB</th>
       <th>House type</th>
       <th>Kouji date</th>
       <th>Plan</th>
@@ -24,13 +46,14 @@
     <% @internet_orders.each do |internet_order| %>
       <tr>
         <td><%= internet_order.sn %></td>
-        <td><%= internet_order.apply_date %></td>
+        <td><%= internet_order.apply_date.strftime('%Y-%m-%d') %></td>
         <td><%= internet_order.name %></td>
         <td><%= internet_order.fb_id %></td>
         <td><%= internet_order.phone_number %></td>
         <td><%= internet_order.postal_code %></td>
+        <td><%= internet_order.dob.strftime('%Y-%m-%d') %></td>
         <td><%= internet_order.house_type %></td>
-        <td><%= internet_order.kouji_date %></td>
+        <td><%= internet_order.kouji_date.strftime('%Y-%m-%d') %></td>
         <td><%= internet_order.plan %></td>
         <td><%= internet_order.link %></td>
         <td><%= internet_order.conclusion %></td>
@@ -43,5 +66,6 @@
 </table>
 
 <br>
-
-<%= link_to 'New Internet Order', new_internet_order_path %>
+<div class="item-space-around">
+  <%= paginate @internet_orders %>
+</div>

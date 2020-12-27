@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_08_095134) do
+ActiveRecord::Schema.define(version: 2020_11_28_060636) do
 
   create_table "internet_orders", force: :cascade do |t|
     t.integer "sn"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_10_08_095134) do
     t.text "conclusion"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "dob"
   end
 
 end

@@ -1,0 +1,21 @@
+<%= paginator.render do -%>
+  <div class="section-block pagination-3 no-padding-top"><!-- Added Here -->
+    <div class="row"><!-- Added Here -->
+      <div class="column width-12"><!-- Added Here -->
+        <ul class="nav" >
+          <%= first_page_tag unless current_page.first? %>&nbsp
+          <%= prev_page_tag unless current_page.first? %>&nbsp
+          <% each_page do |page| -%>&nbsp
+            <% if page.left_outer? || page.right_outer? || page.inside_window? -%>
+              <%= page_tag page %>
+            <% elsif !page.was_truncated? -%>
+              <%= gap_tag %>
+            <% end -%>
+          <% end -%> &nbsp &nbsp
+          <%= next_page_tag unless current_page.last? %>&nbsp
+          <%= last_page_tag unless current_page.last? %>
+        </ul>
+      </div><!-- Added Here -->
+    </div><!-- Added Here -->
+  </div><!-- Added Here -->
+<% end -%>
