@@ -1,0 +1,12 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Internet_Order") do |sheet|
+  
+  # Create the header row
+  sheet.add_row ["ID", "Apply date","Name","Facebook link", "Phone number", "Postal code", "DOB" , "House type","Kouji date","Plan","Link","Conclusion"]
+  
+  # Create entries for each item
+  @internet_orders.each do |internet_order|
+    sheet.add_row [internet_order.sn, internet_order.apply_date.strftime('%Y-%m-%d'), internet_order.name,internet_order.fb_id,internet_order.phone_number,internet_order.postal_code,internet_order.dob.strftime('%Y-%m-%d'),internet_order.house_type,internet_order.kouji_date.strftime('%Y-%m-%d'),internet_order.plan,internet_order.link,internet_order.conclusion]
+  end
+end

@@ -1,0 +1,23 @@
+<script>
+$('.datepicker').datetimepicker({
+  format : 'YYYY-MM-DD',
+  icons: {
+    previous: 'fa fa-arrow-left',
+    next: 'fa fa-arrow-right'
+  }
+});
+</script>
+
+<div id="myDropdown">
+    <%= form_tag({}, {:method => 'get',:class => 'form-control-sm'}) do %>
+        <%=label_tag "Name:" %>
+        <%= text_field_tag :name, params[:name],  autocomplete: 'off' %> &nbsp;    
+        <%=label_tag "Phone Num.:" %>
+        <%= text_field_tag :phone_number, params[:phone_number] , autocomplete: 'off' %>
+        <div class="select-tag">
+        Show <%= select_tag :limit, options_for_select([5, 10, 15, 20], selected: params[:limit] || 10), onchange: "$('#limit_form').submit();" %> documents per page
+        </div>
+        <%= submit_tag 'search', :disable_with => 'Searching...' %>
+        <%= link_to 'clear', :action => 'index'%>
+  <% end %>
+</div>

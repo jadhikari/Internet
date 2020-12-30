@@ -4,11 +4,17 @@ class InternetOrdersController < ApplicationController
   # GET /internet_orders
   # GET /internet_orders.json
   def index
-    @internet_orders  =  InternetOrder.order("created_at desc").page(params[:page]).per(params[:limit])
+    @internet_orders  =  InternetOrder.order("created_at desc").page(params[:page]).per(params[:limit] || 10)
     @internet_orders.where!('name like ?', "%#{params[:name]}%") if params[:name].present?
     @internet_orders.where!('phone_number like ?', "%#{params[:phone_number]}%") if params[:phone_number].present?
     #@internet_orders.where!(name: params[:name]) if params[:name].present?
     #@internet_orders.where!(phone_number: params[:phone_number]) if params[:phone_number].present?
+    respond_to do |format|
+      format.xlsx {
+        response.headers['Content-Disposition'] = "attachment; filename= Internet_Order.xlsx "
+      }
+      format.html { render :index }
+    end
   end
 
   # GET /internet_orders/1

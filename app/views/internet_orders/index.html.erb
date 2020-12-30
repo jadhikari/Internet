@@ -2,26 +2,13 @@
 <p id="notice"><%= notice %></p>
 <%= link_to 'New Internet Order', new_internet_order_path %>
 
-<%= form_tag({}, {:method => 'get',:class => 'form-control-sm'}) do %>
-      <%=label_tag "Name:" %>
-      <%= text_field_tag :name, params[:name],  autocomplete: 'off' %>
-      &nbsp;    
-      <%=label_tag "Phone Num.:" %>
-      <%= text_field_tag :phone_number, params[:phone_number] , autocomplete: 'off' %>
-     
-      <%= submit_tag 'search', :disable_with => 'Searching...' %>
-      <%= link_to 'clear', :action => 'index'%>
-      
-<% end %>
+<button id="myBtn" class="btn popup" style="margin-left:0px;" >
+  Serarch
+</button>
 
-<div class="pull-left">
-    <%= form_tag internet_orders_path, method: :get, id: 'limit_form' do %>
-        <div class="select-tag">
-          Show <%= select_tag :limit, options_for_select([5, 10, 15, 20], selected: params[:limit] || 10), onchange: "$('#limit_form').submit();" %> documents per page
-        </div>
-    <% end %>
-  </div>
- 
+<%= render :partial => 'search' %>
+
+  <%= link_to 'Download as Excel', url_for(request.parameters.merge(format: :xlsx))%>
 
 <table class ="table table-sm table-hover">
   <thead class="thead-dark">
