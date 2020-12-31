@@ -1,14 +1,28 @@
+<script> 
+ function myFunction() {
+  var x = document.getElementById('myDIV');
+  if (x.style.display === 'none') {
+      x.style.display = 'block';
+  } else {
+      x.style.display = 'none';
+    }
+  }
+ </script>
+
 <h1>Internet Orders</h1>
 <p id="notice"><%= notice %></p>
 <%= link_to 'New Internet Order', new_internet_order_path %>
 
-<button id="myBtn" class="btn popup" style="margin-left:0px;" >
-  Serarch
+<button class="s-btn popup" style="margin-left:0px;"  onclick="myFunction()">
+  Serarch <i class="fas fa-chevron-down"></i>
 </button>
+
+
+
 
 <%= render :partial => 'search' %>
 
-  <%= link_to 'Download as Excel', url_for(request.parameters.merge(format: :xlsx))%>
+<%= link_to 'Download as Excel', url_for(request.parameters.merge(format: :xlsx))%>
 
 <table class ="table table-sm table-hover">
   <thead class="thead-dark">
