@@ -10,9 +10,9 @@ class InternetOrdersController < ApplicationController
     #@internet_orders.where!(name: params[:name]) if params[:name].present?
     #@internet_orders.where!(phone_number: params[:phone_number]) if params[:phone_number].present?
     respond_to do |format|
-      format.xlsx {
-        response.headers['Content-Disposition'] = "attachment; filename= Internet_Order.xlsx "
-      }
+       format.xlsx # {
+      #   response.headers['Content-Disposition'] = "attachment; filename= Internet_Order.xlsx "
+      # }
       format.html { render :index }
     end
   end
